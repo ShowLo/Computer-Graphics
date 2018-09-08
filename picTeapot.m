@@ -1,0 +1,20 @@
+teapot;
+hold on;
+pic = imread('Zuckerberg.jpg');
+pic = imresize(pic, 0.3);
+[h, w, ~] = size(pic);
+[a, b] = size(Z_body');
+c = ones(a, b, 3)*255;
+%把图片贴到茶壶壁上去
+c(120:119+h, 1:w/2, :) = pic(:, w/2+1:end, :);
+c(120:119+h, b-w/2+1:b, :) = pic(:, 1:w/2, :);
+c = uint8(c);
+colormap([1 1 1]);
+surf(X_body', Y_body', Z_body', c);
+surf(X_lid, Y_lid, Z_lid, ones(size(Z_lid)));
+surf(X_base, Y_base, Z_base, ones(size(Z_base)));
+surf(X_handle, Y_handle, Z_handle, ones(size(Z_handle)));
+surf(X_spout, Y_spout, Z_spout, ones(size(Z_spout)));
+shading interp;
+lighting phong;
+light('color', 'w', 'style', 'infinite', 'position', [1, 2, 1]);
